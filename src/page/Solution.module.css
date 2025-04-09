@@ -1,0 +1,62 @@
+.contentWrap {
+    width:100%;
+    padding-block:80px;
+    display:flex;
+    flex-direction: column;
+    gap:60px;
+}
+h2 {
+    font-weight: 700;
+    font-size: 32px;
+    position: relative;
+    padding-bottom:30px;
+}
+h2::after {
+    content:"";
+    position: absolute;
+    left:-20px;
+    top:-20px;
+    width:60px;
+    height: 60px;
+    background:url('../../public/solution/solution_deco.png') no-repeat center / cover;
+    rotate: 235deg;
+    opacity: .7;
+}
+.bottombanner {
+    width: 100%;
+    height: 30vh;
+    background: url('../../public/solution/solution_bbanner.png') no-repeat center / cover;
+    filter: brightness(1.1);
+} 
+
+.fs48 {font-size: 48px !important;}
+.fs40 {font-size: 40px !important;}
+.fs32 {font-size: 32px !important;}
+.fs24 {font-size: 24px !important;}
+.fs20 {font-size: 20px !important;}
+.fs16 {font-size: 16px !important;}
+
+@media (max-width: 1023px) {
+    .fs48 {font-size: 32px !important;}
+    .fs40 {font-size: 28px !important;}
+    .fs32 {font-size: 24px !important;}
+    .fs24 {font-size: 20px !important;}
+    .fs20 {font-size: 18px !important;}
+    .fs16 {font-size: 15px !important;}
+
+    h2 {
+        font-size: 24px;
+    }
+}
+@media (max-width: 767px) {
+    .fs48 {font-size: 24px !important;}
+    .fs40 {font-size: 22px !important;}
+    .fs32 {font-size: 19px !important;}
+    .fs24 {font-size: 16px !important;}
+    .fs20 {font-size: 15px !important;}
+    .fs16 {font-size: 14px !important;}
+
+    h2 {
+        font-size: 16px;
+    }
+}

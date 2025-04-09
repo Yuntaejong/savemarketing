@@ -1,0 +1,7 @@
+.contentWrap {
+    width:100%;
+    padding-block:80px;
+    display:flex;
+    flex-direction: column;
+    gap:60px;
+}

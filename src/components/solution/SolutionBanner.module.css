@@ -1,0 +1,87 @@
+.content {
+	width:100%;
+	height:60vh;
+	margin-top:78px;
+}
+
+.imgWrap {
+	width: 100%;
+	height: 100%;
+	position: relative;
+	overflow: hidden;
+}
+
+.imgWrap img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center;
+	filter: blur(4px) brightness(0.5);
+}
+.imgWrap .ment {
+	position:absolute;
+	left:10%;
+	top:50%;
+	transform: translateY(-50%);
+	font-weight: 400;
+	color:#fff;
+	z-index: 1;
+	text-align: left;
+}
+
+.ment p:first-child {
+	font-weight: 600;
+	color:var(--main-color);
+}
+
+.logoWrap {
+	position: absolute;
+	right:10%;
+	bottom: -10%;
+
+	background: url('../../../public/solution/animation1.png') no-repeat center / 100% 100%;
+	animation: logoAni 5s steps(1) infinite;
+
+	width: 50%; 
+	max-width: 700px;
+	height: 80%;
+	max-height: 500px;
+}
+
+@keyframes logoAni {
+	0% {background-image: url('../../../public/solution/animation1.png');}
+	30% {background-image: url('../../../public/solution/animation2.png');}
+	60% {background-image: url('../../../public/solution/animation3.png');}
+	90% {background-image: url('../../../public/solution/animation4.png');}
+}
+
+
+
+.fs32 {font-size: 32px !important;}
+.fs20 {font-size: 20px !important;}
+
+@media (max-width:1500px) {
+	.imgWrap .ment {
+		background-color: rgba(0,0,0,0.8);
+		width:100%;
+		position:absolute;
+		left:0;
+		top:50%;
+		transform: translateY(-50%);
+		text-align: center;
+		padding-block:40px;
+	}
+}
+
+@media (max-width: 1023px) {
+    .fs32 {font-size: 24px !important;}
+	.fs20 {font-size: 18px !important;}
+}
+@media (max-width: 767px) {
+    .fs32 {font-size: 19px !important;}
+	.fs20 {font-size: 15px !important;}
+
+	.logoWrap {
+		display:none;
+	}
+}

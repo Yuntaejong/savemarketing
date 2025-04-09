@@ -1,0 +1,69 @@
+.content {
+	display:flex;
+	flex-direction: column;
+	align-items: start;
+	gap:60px;
+}
+
+.fb {display:flex; width:100%;}
+.fb p {margin: 0 !important;}
+
+.fb > div {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap:10px;
+    text-align: center;
+    word-break: keep-all;
+}
+
+.fb > div p:first-child strong {
+    position: relative;
+    font-weight: 600;
+    font-size: clamp(1rem, 0.8846rem + 0.5128vw, 1.5rem);
+}
+.fb > div p:first-child strong::after {
+    content:"";
+    position: absolute;
+    left:50%;
+    top:-20px;
+    transform: translateX(-50%);
+    width:60px;
+    height: 60px;
+    background:url('../../../public/solution/interactive_deco.png') no-repeat center / cover;
+    opacity: .7;
+}
+
+.content p:last-child span {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: clamp(0.875rem, 0.8462rem + 0.1282vw, 1rem);
+}
+
+.fs24 {font-size: 24px !important;}
+.fs20 {font-size: 20px !important;}
+.fs16 {font-size: 16px !important;}
+
+@media (max-width: 1023px) {
+    .fs24 {font-size: 20px !important;}
+    .fs20 {font-size: 18px !important;}
+    .fs16 {font-size: 15px !important;}
+}
+@media (max-width: 767px) {
+    .fs24 {font-size: 16px !important;}
+    .fs20 {font-size: 15px !important;}
+    .fs16 {font-size: 14px !important;}
+
+    .fb {
+        flex-direction: column;
+        gap:40px;
+    }
+
+    .fb > div p:first-child strong::after {
+        width:40px;
+        height:40px;
+        top:-15px;
+    }
+}

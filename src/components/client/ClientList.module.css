@@ -1,0 +1,11 @@
+.sliderContainer {
+    width: 100%;
+    overflow: hidden;
+}
+
+.clientImage {
+    width: 100%; /* 원하는 크기로 조정 */
+    height: auto;
+    object-fit: cover;
+    min-width: 60px;
+}

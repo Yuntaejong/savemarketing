@@ -1,0 +1,43 @@
+.content {
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    gap:60px;
+}
+.outputWrap {
+    justify-content: center;
+}
+.output {
+    margin-top:20px;
+}
+.output img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+.fs48 {font-size: 48px !important;}
+.fs40 {font-size: 40px !important;}
+.fs32 {font-size: 32px !important;}
+.fs24 {font-size: 24px !important;}
+.fs20 {font-size: 20px !important;}
+.fs16 {font-size: 16px !important;}
+
+@media (max-width: 1023px) {
+    .fs48 {font-size: 32px !important;}
+    .fs40 {font-size: 28px !important;}
+    .fs32 {font-size: 24px !important;}
+    .fs24 {font-size: 20px !important;}
+    .fs20 {font-size: 18px !important;}
+    .fs16 {font-size: 15px !important;}
+}
+@media (max-width: 767px) {
+    .fs48 {font-size: 24px !important;}
+    .fs40 {font-size: 22px !important;}
+    .fs32 {font-size: 19px !important;}
+    .fs24 {font-size: 16px !important;}
+    .fs20 {font-size: 15px !important;}
+    .fs16 {font-size: 14px !important;}
+}

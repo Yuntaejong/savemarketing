@@ -1,0 +1,113 @@
+.content {
+	display:flex;
+	flex-direction: column;
+	align-items: start;
+	gap:60px;
+}
+
+.content p {font-size: 16px; margin: 0 !important;}
+.gridWrap {
+	width: 100%;
+	display:flex;
+	justify-content: center;
+}
+.grid {
+	gap:1.125rem;
+	margin:0;
+	width:100%;
+	justify-content: center;
+}
+
+.gridItem:nth-child(1) {background-image: url('../../../public/company/performance1.jpg');}
+.gridItem:nth-child(2) {background-image: url('../../../public/company/performance2.jpg');}
+.gridItem:nth-child(3) {background-image: url('../../../public/company/performance3.jpg');}
+.gridItem:nth-child(4) {background-image: url('../../../public/company/performance4.jpg');}
+.gridItem:nth-child(5) {background-image: url('../../../public/company/performance5.jpg');}
+.gridItem:nth-child(6) {background-image: url('../../../public/company/performance6.jpg');}
+
+.gridItem {
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: 20px;
+	aspect-ratio: 1/1;
+	position: relative;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	padding-inline: 1.25rem;
+}
+.gridItem::before {
+	content:"";
+	opacity: 0.7;
+	position: absolute;
+	top:0; left:0;
+	background-color: #000;
+	width: 100%;
+	height:100%;
+	border-radius: 20px;
+}
+.gridItem span {position: relative; color:#fff;}
+.gridItem span:first-child {
+	color:#fff;
+	opacity: 1;
+	transition: all 0.5s;
+	word-break: keep-all;
+	text-align: center;
+}
+.gridItem span:last-child {
+	position: absolute;
+	left:50%;
+	transform: translateX(-50%);
+	top:100%;
+	z-index: 1;
+	opacity: 0;
+	text-align: center;
+	display:inline-block;
+	width:100%;
+}
+.gridItem:hover span:first-child {opacity: 0;}
+.gridItem:hover span:last-child {
+	animation: fadeup 1s forwards;
+}
+
+@keyframes fadeup {
+	0% {
+		opacity: 0;
+		top:100%;
+		transform: translateX(-50%);
+	}
+	100% {
+		opacity: 1;
+		top:50%;
+		transform: translate(-50%, -50%);
+	}
+}
+
+.fs24 {font-size: 24px !important;}
+.fs16 {font-size: 16px !important;}
+
+@media (max-width: 1023px) {
+	.gridItem {pointer-events: none;}
+    .fs24 {font-size: 18px !important;}
+    .fs16 {font-size: 14px !important;}
+
+	.gridItem {
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap:5px;
+	}
+	.gridItem span:last-child {
+		position:static;
+		opacity: 1;
+		transform: none;
+		word-break: keep-all;
+	}
+	.col-3 {
+		flex: 0 0 auto;
+		width: 50%;
+	}
+}

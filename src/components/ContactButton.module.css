@@ -1,0 +1,110 @@
+button {border:none;}
+
+.btn {
+	display:inline-block;
+	font-size: 24px;
+	text-decoration: none;
+    position: relative;
+    transition: all 0.2s;
+	background-color: transparent;
+}
+.btn a {
+	padding-right:20px;
+	display:flex;
+	color:#fff;
+}
+
+.theArrow {
+	width:1px;
+	transition: all .2s;
+}
+.shaft {
+	display: block;
+    height: 1px;
+    position: relative;
+    transition: all 0.2s;
+    will-change: transform;
+}
+
+.shaft::after, .shaft::before {
+	content:"";
+	display: block;
+    height: 1px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: all 0.2s;
+	background-color: #fff;
+}
+.shaft::after {transform-origin: bottom right;}
+.shaft::before {transform-origin: top right;}
+
+.leftArrow {
+	position: absolute;
+	top:50%;
+	left:0;
+}
+.leftArrow .shaft {
+	width: 0;
+}
+
+.leftArrow .shaft::before, .leftArrow .shaft::after {
+	width:0;
+}
+
+.main {
+	display:flex;
+	align-items: center;
+	transition: all .2s;
+	width:100%;
+}
+.main .text {margin-right:20px;}
+.main .theArrow {position: relative;}
+.rightArrow {top:0px;}
+.rightArrow .shaft {
+	width:1px;
+	transition-delay: 0.2s;
+}
+
+.rightArrow .shaft::before, .rightArrow .shaft::after {
+	width:8px;
+	transition: all .5s;
+}
+.rightArrow .shaft::before {
+	transform: rotate(40deg);
+}
+.rightArrow .shaft::after {
+	transform: rotate(-40deg);
+}
+
+
+/* hover */
+.btn:hover {color:var(--main-color);}
+
+.btn:hover .leftArrow .shaft {
+	width:64px;
+	transition-delay: 0.1s;
+	background-color: var(--main-color);
+}
+
+.btn:hover .leftArrow .shaft::after, .btn:hover .leftArrow .shaft::before {
+	width:8px;
+	transition-delay: .1s;
+	background-color: var(--main-color);
+}
+.btn:hover .leftArrow .shaft::before {transform: rotate(40deg);}
+.btn:hover .leftArrow .shaft::after {transform: rotate(-40deg);}
+
+.btn:hover .main {transform: translateX(80px);}
+.btn:hover .main .text {color:var(--main-color);}
+
+.btn:hover .rightArrow .shaft {
+	width:0;
+	transform: translateX(200%);
+}
+
+.btn:hover .rightArrow .shaft::after, .btn:hover .rightArrow .shaft::before {
+	width:0;
+	transition: all .1s;
+	transform: rotate(0);
+}

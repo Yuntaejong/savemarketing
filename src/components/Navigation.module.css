@@ -1,0 +1,113 @@
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    max-width: 1920px;
+    background-color: #000;
+    transition: all .3s;
+    z-index: 10;
+}
+
+h1 {
+    width: 200px;
+    margin: 0;
+}
+
+.logo {
+    width: 100%;
+    text-indent: -9999px;
+    display: inline-block;
+    background: url('../../public/navigation/navi_logo_w.png') no-repeat center / contain;
+}
+
+.navCollapse {
+    justify-content: flex-end;
+}
+
+/* Bootstrap의 Nav 컴포넌트와 함께 사용할 스타일 */
+:global(.navbar-nav) {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.navLink {
+    color: #fff;
+    position: relative;
+    transition: all 0.3s ease-in;
+    font-weight: 700;
+    padding-top: 4px;
+    text-decoration: none;
+    display: block;
+}
+
+/* 토글러 버튼 스타일 */
+.navbarToggler {
+    border: none;
+    margin:0;
+}
+
+.navbarToggler:focus {
+    box-shadow: none;
+}
+
+:global(.navbar-toggler-icon) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 100%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* 호버 효과 */
+.navi:hover {
+    background-color: #fff;
+    box-shadow: 0 4px 4px #00000025;
+}
+
+.navi:hover .logo {
+    background: url('../../public/navigation/navi_logo.png') no-repeat center / contain;
+}
+
+.navi:hover .navLink {
+    color: #000;
+}
+.navi:hover .navLink.active {
+    color: var(--main-color);
+}
+
+.navLink.active {
+    transition: all 1s;
+    color: var(--main-color);
+}
+
+.navi:hover .navLink:hover {
+    color: var(--main-color);
+}
+
+
+/* 다크모드일 때 토글러 아이콘 색상 변경 */
+.navi:hover :global(.navbar-toggler-icon) {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 100%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* 반응형 스타일 */
+@media (max-width: 991px) {
+    :global(.navbar-nav) {
+        gap: 20px;
+        padding: 20px 0;
+    }
+    
+    .navi {
+        background-color: #000;
+    }
+    
+    .navi:hover {
+        background-color: #fff;
+    }
+    
+    :global(.navbar-collapse) {
+        margin-top: 10px;
+    }
+}
