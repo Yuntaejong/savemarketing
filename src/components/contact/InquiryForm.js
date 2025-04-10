@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./InquiryForm.module.css";
 import { Container } from "react-bootstrap";
+import axios from "axios"; // axios 추가
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -14,6 +15,10 @@ function InquiryForm() {
 		message: "",
 		agree: false,
 	});
+	
+	// 로딩 및 결과 메시지 상태 추가
+	const [isLoading, setIsLoading] = useState(false);
+	const [resultMessage, setResultMessage] = useState(null);
 
 	// 입력 값 변경 핸들러
 	const handleChange = (e) => {
@@ -24,19 +29,72 @@ function InquiryForm() {
 		});
 	};
 
-	// 폼 제출 핸들러
-	const handleSubmit = (e) => {
+	// 폼 제출 핸들러 - API 호출로 수정
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!formData.agree) {
 			alert("개인정보 수집 및 이용에 동의해주세요.");
 			return;
 		}
-		console.log("폼 데이터:", formData);
-		alert("신청이 완료되었습니다!");
+		
+		setIsLoading(true);
+		setResultMessage(null);
+		
+		try {
+			// 워드프레스 API 엔드포인트로 데이터 전송
+			const response = await axios.post(
+				'http://savemarketing.co.kr/wp-json/savemarketing/v1/inquiry',
+				formData,
+				{
+					headers: {
+						'Content-Type': 'application/json'
+					}
+				}
+			);
+			
+			// 성공 메시지 표시
+			setResultMessage({
+				type: 'success',
+				text: response.data.message || '신청이 완료되었습니다!'
+			});
+			
+			// 폼 초기화
+			setFormData({
+				company: "",
+				manager: "",
+				contact: "",
+				email: "",
+				homepage: "",
+				message: "",
+				agree: false,
+			});
+			
+		} catch (error) {
+			// 오류 메시지 표시
+			console.error('폼 제출 오류:', error);
+			
+			let errorMessage = '문의 접수 중 오류가 발생했습니다. 다시 시도해주세요.';
+			if (error.response && error.response.data && error.response.data.message) {
+				errorMessage = error.response.data.message;
+			}
+			
+			setResultMessage({
+				type: 'error',
+				text: errorMessage
+			});
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
 		<Container>
+			{resultMessage && (
+				<div className={`${styles.message} ${styles[resultMessage.type]}`}>
+					{resultMessage.text}
+				</div>
+			)}
+			
 			<form onSubmit={handleSubmit} className={styles.form}>
 				<div className={styles.formGroup}>
 					<label className={styles.required}>업체명</label>
@@ -59,10 +117,10 @@ function InquiryForm() {
 						placeholder="'-'를 제외한 숫자를 입력해주세요." 
 						required 
 					/>
-					</div>
+				</div>
 				<div className={styles.formGroup}>
 					<label>이메일</label>
-					<input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="(선택) 이메일을 입력해주세요." required />
+					<input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="(선택) 이메일을 입력해주세요." />
 				</div>
 				<div className={styles.formGroup}>
 					<label>홈페이지 주소</label>
@@ -91,7 +149,13 @@ function InquiryForm() {
 						<label htmlFor="agreeCheckbox">개인정보 수집 이용에 동의합니다.</label>
 					</span>
 				</div>
-				<button type="submit" className={styles.submitButton}>신청하기</button>
+				<button 
+					type="submit" 
+					className={styles.submitButton}
+					disabled={isLoading}
+				>
+					{isLoading ? '처리 중...' : '신청하기'}
+				</button>
 			</form>
 		</Container>
 	);
