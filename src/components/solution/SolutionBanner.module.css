@@ -84,4 +84,8 @@
 	.logoWrap {
 		display:none;
 	}
+	.ment p:nth-child(2) {
+		word-break: keep-all;
+		
+	}
 }

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import styles from "./InquiryForm.module.css";
 import { Container } from "react-bootstrap";
-import axios from "axios"; // axios 추가
-
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function InquiryForm() {
@@ -16,7 +14,6 @@ function InquiryForm() {
 		agree: false,
 	});
 	
-	// 로딩 및 결과 메시지 상태 추가
 	const [isLoading, setIsLoading] = useState(false);
 	const [resultMessage, setResultMessage] = useState(null);
 
@@ -29,7 +26,7 @@ function InquiryForm() {
 		});
 	};
 
-	// 폼 제출 핸들러 - API 호출로 수정
+	// 폼 제출 핸들러 - FormSubmit 사용
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!formData.agree) {
@@ -41,46 +38,54 @@ function InquiryForm() {
 		setResultMessage(null);
 		
 		try {
-			// 워드프레스 API 엔드포인트로 데이터 전송
-			const response = await axios.post(
-				'http://savemarketing.co.kr/wp-json/savemarketing/v1/inquiry',
-				formData,
-				{
-					headers: {
-						'Content-Type': 'application/json'
-					}
+			// FormSubmit 서비스로 데이터 전송
+			const form = e.target;
+			const formAction = form.action;
+			
+			const formDataObj = new FormData();
+			formDataObj.append('company', formData.company);
+			formDataObj.append('manager', formData.manager);
+			formDataObj.append('contact', formData.contact);
+			formDataObj.append('email', formData.email || '(미입력)');
+			formDataObj.append('homepage', formData.homepage || '(미입력)');
+			formDataObj.append('message', formData.message);
+			formDataObj.append('_subject', `[문의] ${formData.company} - ${formData.manager}님의 문의`);
+			
+			const response = await fetch(formAction, {
+				method: 'POST',
+				body: formDataObj,
+				headers: {
+					'Accept': 'application/json'
 				}
-			);
-			
-			// 성공 메시지 표시
-			setResultMessage({
-				type: 'success',
-				text: response.data.message || '신청이 완료되었습니다!'
 			});
 			
-			// 폼 초기화
-			setFormData({
-				company: "",
-				manager: "",
-				contact: "",
-				email: "",
-				homepage: "",
-				message: "",
-				agree: false,
-			});
-			
-		} catch (error) {
-			// 오류 메시지 표시
-			console.error('폼 제출 오류:', error);
-			
-			let errorMessage = '문의 접수 중 오류가 발생했습니다. 다시 시도해주세요.';
-			if (error.response && error.response.data && error.response.data.message) {
-				errorMessage = error.response.data.message;
+			// 응답 처리 수정 - JSON 파싱 없이 상태 코드만 확인
+			if (response.ok) {
+				// 성공 메시지 표시
+				setResultMessage({
+					type: 'success',
+					text: '문의가 성공적으로 접수되었습니다. 빠른 시일 내에 연락드리겠습니다.'
+				});
+				
+				// 폼 초기화
+				setFormData({
+					company: "",
+					manager: "",
+					contact: "",
+					email: "",
+					homepage: "",
+					message: "",
+					agree: false,
+				});
+			} else {
+				throw new Error('서버 응답이 실패 상태를 반환했습니다.');
 			}
+		} catch (error) {
+			console.error('폼 제출 오류:', error);
 			
 			setResultMessage({
 				type: 'error',
-				text: errorMessage
+				text: '문의 접수 중 오류가 발생했습니다. 다시 시도해주세요.'
 			});
 		} finally {
 			setIsLoading(false);
@@ -95,7 +100,19 @@ function InquiryForm() {
 				</div>
 			)}
 			
-			<form onSubmit={handleSubmit} className={styles.form}>
+			{/* action 속성에 FormSubmit 엔드포인트 추가 */}
+			<form 
+				onSubmit={handleSubmit} 
+				className={styles.form}
+				action="https://formsubmit.co/37d0d8ceb5cc26faf66c2f1df305ab8b" 
+				method="POST"
+			>
+				{/* FormSubmit 설정 필드 */}
+				<input type="hidden" name="_captcha" value="false" />
+				<input type="hidden" name="_next" value={window.location.href} />
+				<input type="hidden" name="_template" value="table" />
+				<input type="text" name="_honey" style={{display: 'none'}} />
+				
 				<div className={styles.formGroup}>
 					<label className={styles.required}>업체명</label>
 					<input type="text" name="company" value={formData.company} onChange={handleChange} placeholder="업체명을 입력해주세요." required />

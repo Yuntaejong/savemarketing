@@ -62,8 +62,10 @@ span b {
 
 	.imgWrap img {
 		filter: brightness(.4);
+		object-position: 20% center;
 	}
 	.imgWrap div {
+		width: 100%;
 		position: absolute;
 		left:50%;
 		right:0;
@@ -75,9 +77,16 @@ span b {
 		justify-content: center;
 		align-items: center;
 		gap: 20px;
+		padding-block:40px;
+		background-color: rgba(0,0,0,0.8);
 	}
 
 	.ment {
 		align-items:center;
+		width: 100%;
+	}
+	.ment span:first-child {
+		word-break: keep-all;
+		text-align: center;
 	}
 }
