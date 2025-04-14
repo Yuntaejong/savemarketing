@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Suspense, lazy } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -14,7 +14,7 @@ const Contact = lazy(() => import("./page/Contact"));
 
 function App() {
 	return (
-		<Router>
+		<Router basename="/savemarketing">
 			<ScrollToTop />
 			<div className="App">
 				<Suspense fallback={<div className="loading"><span className="loader"></span></div>}>

@@ -24,6 +24,44 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+
+    <script type="text/javascript">
+      // 쿼리 파라미터 p에서 원래 URL로 다시 라우팅
+      (function() {
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        
+        var l = window.location;
+        var query = l.search.substr(1);
+        var params = {};
+        
+        if (query) {
+          query.split('&').forEach(function(part) {
+            var item = part.split('=');
+            params[decodeURIComponent(item[0])] = decodeURIComponent(item[1] || '');
+          });
+        }
+        
+        if (params.p) {
+          // URL 재작성
+          var newPath = l.pathname.replace(/\/$/, '') + '/' + params.p;
+          var newSearch = '';
+          
+          // 다른 쿼리 파라미터 유지
+          Object.keys(params).forEach(function(key) {
+            if (key !== 'p') {
+              newSearch += (newSearch ? '&' : '?') + key + '=' + params[key].replace(/~and~/g, '&');
+            }
+          });
+          
+          // 브라우저 히스토리 업데이트
+          window.history.replaceState(null, null, newPath + newSearch + l.hash);
+        } else if (redirect && redirect !== l.pathname) {
+          // 세션 스토리지 활용 리다이렉션
+          window.history.replaceState(null, null, redirect);
+        }
+      })();
+    </script>
     <title>Save Marketing</title>
   </head>
   <body>
