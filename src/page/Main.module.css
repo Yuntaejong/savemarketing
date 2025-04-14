@@ -10,7 +10,7 @@
 	left:0;
 	top:0;
 	opacity: 0.1;
-	background: url('../../public/main/main_1.gif') no-repeat center / contain;
+	background: url('../../public/main/main_1.gif') no-repeat center / cover;
 	z-index: 0;
 }
 

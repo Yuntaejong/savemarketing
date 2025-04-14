@@ -6,8 +6,9 @@ function CompanyBanner() {
     return (
 		<div className={styles.content} data-aos="fade-up" data-aos-duration="1000">
 			<div className={styles.imgWrap}>
-				<img src="../company/companybanner.png" alt="freepick-mockup-img-companyBanner"></img>
-				<div >
+				<div className={styles.imgContent}>
+				</div>
+				<div>
 					<p className={styles.ment}>
 						<span className={styles.fs32}>Client Of <span>SaveMarketing</span></span>
 						<span className={styles.fs32}>병의원 전문 광고대행사</span>
