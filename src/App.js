@@ -14,7 +14,7 @@ const Contact = lazy(() => import("./page/Contact"));
 
 function App() {
 	return (
-		<Router>
+		<Router basename="/savemarketing">
 			<ScrollToTop />
 			<div className="App">
 				<Suspense fallback={<div className="loading"><span className="loader"></span></div>}>
