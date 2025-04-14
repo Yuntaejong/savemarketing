@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import styles from "./ClientList.module.css";
 
-const images = Array.from({ length: 14 }, (_, i) => `../client/client${i + 1}.png`);
+const images = Array.from({ length: 14 }, (_, i) => `${process.env.PUBLIC_URL}/client/client${i + 1}.png`);
 
 function ClientList() {
 	return (

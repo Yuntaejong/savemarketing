@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Method.module.css'
 import { Container, Row, Col } from "react-bootstrap";
+
 function Method() {
 	return (
 		<Container fluid  data-aos="fade-up" data-aos-duration="1000">
@@ -14,7 +15,7 @@ function Method() {
 						<Row>
 					<Col md={12} sm={12} xs={12}>
 						<div className={styles.imgWrap}>
-							<img src="../company/solution_1.png" alt="세이브마케팅 전략"></img>
+							<img src={`${process.env.PUBLIC_URL}/company/solution_1.png`} alt="세이브마케팅 전략"></img>
 						</div>
 					</Col>
 				</Row>

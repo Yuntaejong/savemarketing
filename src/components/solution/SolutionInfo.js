@@ -22,7 +22,7 @@ function SolutionInfo() {
 						<p className={styles.fs16}>어디에도 없는 마케팅, 어디에도 없는 진실함으로 ROI의 격차를 보여드립니다.</p>
 						<Row className={styles.outputWrap}>
 							<Col md={8} sm={8} xs={8} className={styles.output}>
-								<img src="../solution/solution_output.png" alt="CPA 광고 성과"></img>
+								<img src={`${process.env.PUBLIC_URL}/solution/solution_output.png`} alt="CPA 광고 성과"></img>
 							</Col>
 						</Row>
 					</Col>
