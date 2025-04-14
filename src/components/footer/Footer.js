@@ -6,7 +6,7 @@ function Footer() {
 		<div className={styles.footer}>
 			<div className={styles.right}>
 				<a href="#!">
-					<img src="../footer/footer_logo.png" alt="savemarketing"></img>
+					<img src={`${process.env.PUBLIC_URL}/footer/footer_logo.png`} alt="savemarketing"></img>
 				</a>
 				<p className={styles.copyright}>
 					&copy; 2025. savemarketing Co. All Rights Reserved.
