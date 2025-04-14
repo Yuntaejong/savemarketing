@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script type="text/javascript">
+    // 404.html에서 원래 URL로 리다이렉션하는 스크립트
+    var pathSegmentsToKeep = 1;
+    var l = window.location;
+    var segments = l.pathname.split('/');
+    var redirectUrl = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '');
+    redirectUrl += segments.slice(0, pathSegmentsToKeep + 1).join('/') + '/';
+    
+    // 나머지 경로를 p 파라미터로 전달
+    var remainingPath = segments.slice(pathSegmentsToKeep + 1).join('/');
+    if (remainingPath) {
+      redirectUrl += '?p=' + remainingPath;
+    }
+    
+    // 쿼리 스트링 추가
+    if (l.search && l.search.length > 1) {
+      redirectUrl += (remainingPath ? '&' : '?') + l.search.slice(1).replace(/&/g, '~and~');
+    }
+    
+    // 해시 추가
+    if (l.hash) {
+      redirectUrl += l.hash;
+    }
+    
+    // 리다이렉션
+    window.location.replace(redirectUrl);
+  </script>
+</head>
+<body>
+  <h1>페이지 리다이렉션 중...</h1>
+</body>
+</html>
